@@ -103,11 +103,11 @@ function criaFlappyBird() {
         altura: 24,
         x: 10,
         y: 50,
-        pulo: 4.6,
+        pulo: 2,
         pula() {
             flappyBird.velocidade = - flappyBird.pulo;
         },
-        gravidade: 0.25,
+        gravidade: 0.10,
         velocidade: 0,
         atualiza() {
             if (colisão(flappyBird, globais.chao)) {
@@ -213,8 +213,8 @@ function criaCanos() {
 
         },
         colidiuFlappy(par) {
-            const cabecaFlappy = globais.flappyBird.y;
-            const peFlappy = globais.flappyBird.y + globais.flappyBird.altura;
+            const cabecaFlappy = globais.flappyBird.y + (globais.flappyBird.altura - 1);
+            const peFlappy = globais.flappyBird.y + (globais.flappyBird.altura - 2);
 
             if ((globais.flappyBird.x + globais.flappyBird.largura) >= par.x) {
                 if (cabecaFlappy <= par.canoCeu.y) {
@@ -271,7 +271,7 @@ function criaPlacar() {
 
         },
         atualiza() {
-            const intervaloFrames = 10;
+            const intervaloFrames = 100;
             const passouIntervalo = frames % intervaloFrames === 0;
 
             if (passouIntervalo) {
@@ -322,10 +322,14 @@ const mensagemGameOver = {
             mensagemGameOver.x, mensagemGameOver.y,
             mensagemGameOver.largura, mensagemGameOver.altura,
         );
+        //Pontuação do Score Game Over
         contexto.font = '35px "VT323"';
         contexto.textAlign = 'right';
         contexto.fillStyle = 'black';
         contexto.fillText(`${globais.placar.pontuacao}`, canvas.width - 70, 150);
+        //Medalha
+        
+
     }
 }
 
